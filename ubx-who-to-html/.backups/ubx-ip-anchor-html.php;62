@@ -1,0 +1,53 @@
+<?php
+
+/**
+ *   Return the remote IP address of the user accessing the site, if it's available, or null otherwise
+ */
+function qa_remote_ip_address ()
+{
+//	$_SERVER['HTTP_X_FORWARDED_FOR'] = "151.91.37.66, 127.0.0.1";
+//	error_log ("+ qa_remote_ip_address : " .
+//		"qa_remote_ip_address_base = '" . qa_remote_ip_address_base () . "' : " .
+//		"HTTP_X_FORWARDED_FOR = '" . $_SERVER['HTTP_X_FORWARDED_FOR'] . "' : " .
+//		"HTTP_CLIENT_IP = '" . $_SERVER['HTTP_CLIENT_IP'] . "'");
+
+	if (!empty($_SERVER['HTTP_X_FORWARDED_FOR']))
+	{
+		$HTTP_X_Forwarded_For = $_SERVER['HTTP_X_FORWARDED_FOR'];
+
+		if (preg_match ('/(.*),/', $HTTP_X_Forwarded_For, $matches))
+		{
+			$Retval = $matches[1];
+		}
+		else
+		{
+			$Retval = $HTTP_X_Forwarded_For;
+		} // if
+	}
+	elseif (!empty($_SERVER['HTTP_CLIENT_IP']))
+	{
+		$Retval = $_SERVER['HTTP_CLIENT_IP'];
+	}
+	else
+	{
+		$Retval = qa_remote_ip_address_base ();
+	} // if
+
+//	error_log ("- qa_remote_ip_address : " . "Retval = '" . $Retval . "' ");
+	return $Retval;
+} // qa_remote_ip_address
+
+/**
+ *   Return HTML to use for $ip address, which links to appropriate page with $anchorhtml
+ */
+function qa_ip_anchor_html ($ip, $anchorhtml = null)
+{
+	error_log ("+ qa_ip_anchor_html : " . "ip = '$ip' : " . "anchorhtml = '$anchorhtml'");
+
+	$Retval = qa_ip_anchor_html_base ($ip, $anchorhtml);
+	$Retval = $Retval . "''" . geoip_country_name_by_name ($ip) . "''";
+
+	error_log ("- qa_ip_anchor_html : " . "Retval = '$Retval'");
+	return $Retval;
+} // qa_ip_anchor_html
+

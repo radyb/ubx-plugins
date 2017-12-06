@@ -1,0 +1,18 @@
+<?php
+
+/**
+ *   Return HTML to use for $ip address, which links to appropriate page with $anchorhtml
+ */
+function qa_ip_anchor_html ($ip, $anchorhtml = null)
+{
+	error_log ("+ qa_ip_anchor_html : " . "ip = '$ip' : " . "anchorhtml = '$anchorhtml'");
+
+	$Retval = qa_ip_anchor_html_base ($ip, $anchorhtml);
+	$Retval = $Retval . "''" . geoip_country_name_by_name ($ip) . "''";
+
+	error_log ("- qa_ip_anchor_html : " . "Retval = '$Retval'");
+	return $Retval;
+} // qa_ip_anchor_html
+
+// vim: set wrap tabstop=8 shiftwidth=4 softtabstop=4 expandtab :
+// vim: set textwidth=0 filetype=php foldmethod=marker nospell :

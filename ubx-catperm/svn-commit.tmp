@@ -1,0 +1,4 @@
+show field Access Level only if user level is  admin:
+--This line, and those below, will be ignored--
+
+M    ubxcat_layer.php
