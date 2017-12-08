@@ -16,7 +16,7 @@ class tags_widget
 	public function allow_region($region)
 	{
 		$allowed = array(
-			'side', 'main',
+			'side', 'main', 'full'
 		);
 		return in_array($region, $allowed);
 	}
