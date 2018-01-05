@@ -18,7 +18,11 @@ class welcome_widget
 	
 	public function output_widget($region, $place, $themeobject, $template, $request, $qa_content)
 	{
-		$themeobject->output('<div class="welcome-widget">'.qa_opt('ubx_welcome_text').'</div>');
+		$themeobject->output('<div class="qa-body-wrapper">'.
+					 		 '<div class="welcome-widget">'.
+							 qa_opt('ubx_welcome_text').
+							 '</div>'.
+							 '</div>');
 	}
 	
 	public function option_default($option)
