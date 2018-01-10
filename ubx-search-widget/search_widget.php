@@ -53,7 +53,7 @@ class search_widget
 
 		$themeobject->output(
 			'</form>'.
-			'<a href="#">Learn more about Support Communities</a>'. 
+			'<a href="'.qa_path_html('usage',null).'">Learn more about Support Communities</a>'. 
 			'</div>'.
 			'</div>'.
 			'</div>'
